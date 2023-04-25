@@ -14,7 +14,7 @@ export class AircraftService {
   //Liste de tous les avions en base => une fois sur 2 on souhaite provaquer une erreur 
   public getAircrafts():Observable<Aircraft[]> {
     let host = Math.random() > 0.5 ? environment.host : environment.unreachableHost;
-    return this.http.get<Aircraft[]>(host + "/aircraft");
+    return this.http.get<Aircraft[]>(host + "/aircrafts");
   }
 
   //Liste des avions en phase design
@@ -24,7 +24,7 @@ export class AircraftService {
 
   //Liste des avions en phase de développement
   public getDevelopementAircrafts():Observable<Aircraft[]>{
-    return this.http.get<Aircraft[]>(environment.host + "/aircrafts?developement=true");
+    return this.http.get<Aircraft[]>(environment.host + "/aircrafts?development=true");
   }
 
   //Renvoi un avion à partir de l'id

@@ -6,6 +6,9 @@ import { AppDataState, DataStateEnum } from 'src/app/state/DataStateEnum';
 import { ActionEvent } from '../../state/action-event';
 import { AircraftActionsTypes } from './aircrafts-navbar/aircraftsActionsTypes';
 import { EventService } from 'src/app/state/event.service';
+import { Store } from '@ngrx/store';
+import { AircraftStateEnum, AircraftsState } from 'src/app/ngrx/aircrafts.state';
+import { selectCountAlertAircrafts } from 'src/app/ngrx/aircrafts.selectors';
 
 @Component({
   selector: 'app-aircrafts',
@@ -13,73 +16,89 @@ import { EventService } from 'src/app/state/event.service';
   styleUrls: ['./aircrafts.component.css']
 })
 export class AircraftsComponent implements OnInit{
-  
-  constructor(private aircraftService:AircraftService, private eventService:EventService) {}
+  aircraftsState$:Observable<AircraftsState> | null = null;
+  readonly aircraftsStateEnum = AircraftStateEnum;
+  countAlertAircrafts$ : Observable<number> | undefined;
 
-  ngOnInit(): void {
-    this.eventService.eventSubjectObservable.subscribe((actionEvent : ActionEvent) => {
-      this.OnActionEvent(actionEvent);
-    })
+  constructor(private store:Store<any>) {
+    this.countAlertAircrafts$ = store.select(selectCountAlertAircrafts);
   }
+  
+  ngOnInit(): void {
+    this.aircraftsState$ = this.store.pipe(
+      map((state) => state.airbusState)
+      );
+  }
+  
+    
+
+
+  // constructor(private aircraftService:AircraftService, private eventService:EventService) {}
+
+  // ngOnInit(): void {
+  //   this.eventService.eventSubjectObservable.subscribe((actionEvent : ActionEvent) => {
+  //     this.OnActionEvent(actionEvent);
+  //   })
+  // }
 
   // -----------------------------
   // ----------OPTION 3-----------
   // -----------------------------
 
-  aircrafts$:Observable<AppDataState<Aircraft[]>> | null = null;
-  readonly dataStateEnum = DataStateEnum;
 
-  OnActionEvent($actionEvent : ActionEvent) {
-    switch ($actionEvent.type) {
-      case AircraftActionsTypes.GET_ALL_AIRCRAFTS:
-        this.getAllAircrafts();
-        break;
-      case AircraftActionsTypes.GET_DESIGNED_AIRCRAFTS:
-        this.getDesignedAircrafts()
-        break;
-      case AircraftActionsTypes.GET_DEVELOPMENT_AIRCRAFTS:
-        this.getDevelopementAircrafts()
-        break;
-      case AircraftActionsTypes.GET_SEARCH_AIRCRAFTS:
-        this.search($actionEvent.payload);
-        break;
-      default:
-        break;
-    }
-  }
+  // readonly dataStateEnum = DataStateEnum;
+
+  // OnActionEvent($actionEvent : ActionEvent) {
+  //   switch ($actionEvent.type) {
+  //     case AircraftActionsTypes.GET_ALL_AIRCRAFTS:
+  //       this.getAllAircrafts();
+  //       break;
+  //     case AircraftActionsTypes.GET_DESIGNED_AIRCRAFTS:
+  //       this.getDesignedAircrafts()
+  //       break;
+  //     case AircraftActionsTypes.GET_DEVELOPMENT_AIRCRAFTS:
+  //       this.getDevelopementAircrafts()
+  //       break;
+  //     case AircraftActionsTypes.GET_SEARCH_AIRCRAFTS:
+  //       this.search($actionEvent.payload);
+  //       break;
+  //     default:
+  //       break;
+  //   }
+  // }
   
-  search(payload: any) {
-    this.aircrafts$ = this.aircraftService.getAircrafts().pipe(
-      map(data => data.filter(a => a.prog.includes(payload))),
-      map(data => ({dataState : DataStateEnum.LOADED, data : data})),
-      startWith({dataState : DataStateEnum.LOADING}),
-      catchError(err => of({dataState : DataStateEnum.ERROR, errorMessage : err.message}))
-    )
-  }
+  // search(payload: any) {
+  //   this.aircrafts$ = this.aircraftService.getAircrafts().pipe(
+  //     map(data => data.filter(a => a.prog.includes(payload))),
+  //     map(data => ({dataState : DataStateEnum.LOADED, data : data})),
+  //     startWith({dataState : DataStateEnum.LOADING}),
+  //     catchError(err => of({dataState : DataStateEnum.ERROR, errorMessage : err.message}))
+  //   )
+  // }
 
-  getAllAircrafts() {
-    this.aircrafts$ = this.aircraftService.getAircrafts().pipe(
-      map(data => ({dataState : DataStateEnum.LOADED, data : data})),
-      startWith({dataState : DataStateEnum.LOADING}),
-      catchError(err => of({dataState : DataStateEnum.ERROR, errorMessage : err.message}))
-    )
-  }
+  // getAllAircrafts() {
+  //   this.aircrafts$ = this.aircraftService.getAircrafts().pipe(
+  //     map(data => ({dataState : DataStateEnum.LOADED, data : data})),
+  //     startWith({dataState : DataStateEnum.LOADING}),
+  //     catchError(err => of({dataState : DataStateEnum.ERROR, errorMessage : err.message}))
+  //   )
+  // }
 
-  getDesignedAircrafts() {
-    this.aircrafts$ = this.aircraftService.getDesignedAircrafts().pipe(
-      map(data => ({dataState : DataStateEnum.LOADED, data : data})),
-      startWith({dataState : DataStateEnum.LOADING}),
-      catchError(err => of({dataState : DataStateEnum.ERROR, errorMessage : err.message}))
-    )
-  }
+  // getDesignedAircrafts() {
+  //   this.aircrafts$ = this.aircraftService.getDesignedAircrafts().pipe(
+  //     map(data => ({dataState : DataStateEnum.LOADED, data : data})),
+  //     startWith({dataState : DataStateEnum.LOADING}),
+  //     catchError(err => of({dataState : DataStateEnum.ERROR, errorMessage : err.message}))
+  //   )
+  // }
 
-  getDevelopementAircrafts() {
-    this.aircrafts$ = this.aircraftService.getDevelopementAircrafts().pipe(
-      map(data => ({dataState : DataStateEnum.LOADED, data : data})),
-      startWith({dataState : DataStateEnum.LOADING}),
-      catchError(err => of({dataState : DataStateEnum.ERROR, errorMessage : err.message}))
-    )
-  }
+  // getDevelopementAircrafts() {
+  //   this.aircrafts$ = this.aircraftService.getDevelopementAircrafts().pipe(
+  //     map(data => ({dataState : DataStateEnum.LOADED, data : data})),
+  //     startWith({dataState : DataStateEnum.LOADING}),
+  //     catchError(err => of({dataState : DataStateEnum.ERROR, errorMessage : err.message}))
+  //   )
+  // }
 
   // -----------------------------
   // ----------OPTION 2-----------

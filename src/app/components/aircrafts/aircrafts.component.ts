@@ -3,6 +3,8 @@ import { AircraftService } from 'src/app/services/aircraft.service';
 import { Aircraft } from 'src/app/model/Aircraft.model';
 import { Observable, catchError, map, of, startWith } from 'rxjs';
 import { AppDataState, DataStateEnum } from 'src/app/state/DataStateEnum';
+import { ActionEvent } from './aircrafts-navbar/action-event';
+import { AircraftActionsTypes } from './aircrafts-navbar/aircraftsActionsTypes';
 
 @Component({
   selector: 'app-aircrafts',
@@ -22,10 +24,32 @@ export class AircraftsComponent implements OnInit{
   aircrafts$:Observable<AppDataState<Aircraft[]>> | null = null;
   readonly dataStateEnum = DataStateEnum;
 
-  OnActionEvent($event : any) {
-    if($event == "ALL_AIRCRAFTS") this.getAllAircrafts();
-    if($event == "BY_DESIGN_AIRCRAFTS") this.getDesignedAircrafts();
-    if($event == "BY_DEVELOP_AIRCRAFTS") this.getDevelopementAircrafts();
+  OnActionEvent($actionEvent : ActionEvent) {
+    switch ($actionEvent.type) {
+      case AircraftActionsTypes.GET_ALL_AIRCRAFTS:
+        this.getAllAircrafts();
+        break;
+      case AircraftActionsTypes.GET_DESIGNED_AIRCRAFTS:
+        this.getDesignedAircrafts()
+        break;
+      case AircraftActionsTypes.GET_DEVELOPMENT_AIRCRAFTS:
+        this.getDevelopementAircrafts()
+        break;
+      case AircraftActionsTypes.GET_SEARCH_AIRCRAFTS:
+        this.search($actionEvent.payload);
+        break;
+      default:
+        break;
+    }
+  }
+  
+  search(payload: any) {
+    this.aircrafts$ = this.aircraftService.getAircrafts().pipe(
+      map(data => data.filter(a => a.prog.includes(payload))),
+      map(data => ({dataState : DataStateEnum.LOADED, data : data})),
+      startWith({dataState : DataStateEnum.LOADING}),
+      catchError(err => of({dataState : DataStateEnum.ERROR, errorMessage : err.message}))
+    )
   }
 
   getAllAircrafts() {

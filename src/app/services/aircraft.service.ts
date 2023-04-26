@@ -8,9 +8,11 @@ import { Aircraft } from '../model/Aircraft.model';
   providedIn: 'root'
 })
 export class AircraftService {
+  items: Aircraft[] = [];
+  searchTerm: string = '';
 
-  constructor(private http:HttpClient) { }
-
+  constructor(private http:HttpClient) { }  
+  
   //Liste de tous les avions en base => une fois sur 2 on souhaite provaquer une erreur 
   public getAircrafts():Observable<Aircraft[]> {
     let host = Math.random() > 0.5 ? environment.host : environment.unreachableHost;

@@ -3,8 +3,9 @@ import { AircraftService } from 'src/app/services/aircraft.service';
 import { Aircraft } from 'src/app/model/Aircraft.model';
 import { Observable, catchError, map, of, startWith } from 'rxjs';
 import { AppDataState, DataStateEnum } from 'src/app/state/DataStateEnum';
-import { ActionEvent } from './aircrafts-navbar/action-event';
+import { ActionEvent } from '../../state/action-event';
 import { AircraftActionsTypes } from './aircrafts-navbar/aircraftsActionsTypes';
+import { EventService } from 'src/app/state/event.service';
 
 @Component({
   selector: 'app-aircrafts',
@@ -13,9 +14,13 @@ import { AircraftActionsTypes } from './aircrafts-navbar/aircraftsActionsTypes';
 })
 export class AircraftsComponent implements OnInit{
   
-  constructor(private aircraftService:AircraftService) {}
+  constructor(private aircraftService:AircraftService, private eventService:EventService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.eventService.eventSubjectObservable.subscribe((actionEvent : ActionEvent) => {
+      this.OnActionEvent(actionEvent);
+    })
+  }
 
   // -----------------------------
   // ----------OPTION 3-----------

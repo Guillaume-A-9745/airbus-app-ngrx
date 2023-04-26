@@ -4,6 +4,7 @@ import { Aircraft } from 'src/app/model/Aircraft.model';
 import { Observable, catchError, map, of, startWith } from 'rxjs';
 import { AppDataState, DataStateEnum } from 'src/app/state/DataStateEnum';
 import { AircraftActionsTypes } from './aircraftsActionsTypes';
+import { EventService } from 'src/app/state/event.service';
 
 @Component({
   selector: 'app-aircrafts-navbar',
@@ -14,20 +15,24 @@ export class AircraftsNavbarComponent implements OnInit{
   @Output() eventEmitter : EventEmitter<any> =new EventEmitter();
   payload: string = '';
   
-  constructor() {}
+  constructor(private eventService:EventService) {}
 
   ngOnInit(): void {}
 
   getAllAircrafts() {
-    this.eventEmitter.emit({type : AircraftActionsTypes.GET_ALL_AIRCRAFTS , payload : null});
+    this.eventService.publishEvent({type : AircraftActionsTypes.GET_ALL_AIRCRAFTS , payload : null});
+    // this.eventEmitter.emit({type : AircraftActionsTypes.GET_ALL_AIRCRAFTS , payload : null});
   }
   getDesignedAircrafts() {
-    this.eventEmitter.emit({type : AircraftActionsTypes.GET_DESIGNED_AIRCRAFTS , payload : null});
+    this.eventService.publishEvent({type : AircraftActionsTypes.GET_DESIGNED_AIRCRAFTS , payload : null});
+    // this.eventEmitter.emit({type : AircraftActionsTypes.GET_DESIGNED_AIRCRAFTS , payload : null});
   }
   getDevelopementAircrafts() {
-    this.eventEmitter.emit({type : AircraftActionsTypes.GET_DEVELOPMENT_AIRCRAFTS , payload : null});
+    this.eventService.publishEvent({type : AircraftActionsTypes.GET_DEVELOPMENT_AIRCRAFTS , payload : null});
+    // this.eventEmitter.emit({type : AircraftActionsTypes.GET_DEVELOPMENT_AIRCRAFTS , payload : null});
   }
   onSearch(value : any) {
-    this.eventEmitter.emit({type : AircraftActionsTypes.GET_SEARCH_AIRCRAFTS , payload : value});
+    this.eventService.publishEvent({type : AircraftActionsTypes.GET_SEARCH_AIRCRAFTS , payload : value});
+    // this.eventEmitter.emit({type : AircraftActionsTypes.GET_SEARCH_AIRCRAFTS , payload : value});
   }
 }

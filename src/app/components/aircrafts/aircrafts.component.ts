@@ -1,15 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AircraftService } from 'src/app/services/aircraft.service';
-import { Aircraft } from 'src/app/model/Aircraft.model';
-import { Observable, catchError, map, of, startWith } from 'rxjs';
-import { AppDataState, DataStateEnum } from 'src/app/state/DataStateEnum';
-import { ActionEvent } from '../../state/action-event';
-import { AircraftActionsTypes } from './aircrafts-navbar/aircraftsActionsTypes';
-import { EventService } from 'src/app/state/event.service';
+import { Observable, map } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AircraftStateEnum, AircraftsState } from 'src/app/ngrx/aircrafts.state';
 import { selectCountAlertAircrafts } from 'src/app/ngrx/aircrafts.selectors';
-
+ 
 @Component({
   selector: 'app-aircrafts',
   templateUrl: './aircrafts.component.html',
@@ -27,7 +21,7 @@ export class AircraftsComponent implements OnInit{
   ngOnInit(): void {
     this.aircraftsState$ = this.store.pipe(
       map((state) => state.airbusState)
-      );
+    );
   }
   
     

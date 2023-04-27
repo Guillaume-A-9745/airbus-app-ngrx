@@ -16,7 +16,10 @@ export enum AircraftActionsTypes {
 
     GET_SEARCH_AIRCRAFTS = "[Aircrafts] Get Search Aircrafts",
     GET_SEARCH_AIRCRAFTS_SUCCESS = "[Aircrafts] Get Search Aircrafts Success",
-    GET_SEARCH_AIRCRAFTS_ERROR = "[Aircrafts] Get Search Aircrafts Error"
+    GET_SEARCH_AIRCRAFTS_ERROR = "[Aircrafts] Get Search Aircrafts Error",
+
+    ADD_OPERATION = "[Aircrafts] Add something to Aircrafts",
+    REMOVE_OPERATION = "[Aircrafts] Remove something to Aircrafts"
 }
 
 export class GetAllAircraftsAction implements Action{
@@ -71,4 +74,13 @@ export class GetSearchAircraftsActionError implements Action{
     constructor(public payload:string){}
 }
 
-export type AircraftsActions = GetAllAircraftsAction | GetAllAircraftsActionSuccess | GetAllAircraftsActionError | GetDesignedAircraftsAction | GetDesignedAircraftsActionSuccess | GetDesignedAircraftsActionError | GetDevelopmentAircraftsAction | GetDevelopmentAircraftsActionSuccess | GetDevelopmentAircraftsActionError | GetSearchAircraftsAction | GetSearchAircraftsActionSuccess | GetSearchAircraftsActionError;
+export class GetAddOperation implements Action{
+    type: AircraftActionsTypes = AircraftActionsTypes.GET_ALL_AIRCRAFTS;
+    constructor(public payload:any){}
+}
+export class GetzRemoveOperation implements Action{
+    type: AircraftActionsTypes = AircraftActionsTypes.GET_ALL_AIRCRAFTS;
+    constructor(public payload:any){}
+}
+
+export type AircraftsActions = GetAllAircraftsAction | GetAllAircraftsActionSuccess | GetAllAircraftsActionError | GetDesignedAircraftsAction | GetDesignedAircraftsActionSuccess | GetDesignedAircraftsActionError | GetDevelopmentAircraftsAction | GetDevelopmentAircraftsActionSuccess | GetDevelopmentAircraftsActionError | GetSearchAircraftsAction | GetSearchAircraftsActionSuccess | GetSearchAircraftsActionError | GetAddOperation | GetzRemoveOperation;

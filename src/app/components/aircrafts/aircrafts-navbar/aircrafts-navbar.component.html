@@ -7,7 +7,7 @@
         </li>
     </ul>
     <div>
-        <form class="d-flex" (ngSubmit)="onSearch(payload)">
+        <form class="d-flex" (ngSubmit)="onSearch()">
             <input class="form-control me-2" type="search" name="payload" placeholder="Search" aria-label="Search" [(ngModel)]="payload">
             <button class="btn btn-outline-success" type="submit">Search</button>
         </form>

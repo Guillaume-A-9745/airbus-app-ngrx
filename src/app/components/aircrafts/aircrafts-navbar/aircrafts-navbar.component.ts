@@ -37,8 +37,8 @@ export class AircraftsNavbarComponent implements OnInit{
     // this.eventService.publishEvent({type : AircraftActionsTypes.GET_DEVELOPMENT_AIRCRAFTS , payload : null});
     // this.eventEmitter.emit({type : AircraftActionsTypes.GET_DEVELOPMENT_AIRCRAFTS , payload : null});
   }
-  onSearch(value : any) {
-    this.store.dispatch(new GetSearchAircraftsAction({}));
+  onSearch() {
+    this.store.dispatch(new GetSearchAircraftsAction(this.payload));
     // this.eventService.publishEvent({type : AircraftActionsTypes.GET_SEARCH_AIRCRAFTS , payload : value});
     // this.eventEmitter.emit({type : AircraftActionsTypes.GET_SEARCH_AIRCRAFTS , payload : value});
   }

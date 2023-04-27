@@ -11,6 +11,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AircraftsReducer } from './ngrx/aircrafts.reducer';
 import { AircraftsEffects } from './ngrx/aircrafts.effects';
+import { AlertComponent } from './components/alert/alert.component';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { AircraftsEffects } from './ngrx/aircrafts.effects';
     AppComponent,
     AircraftsComponent,
     AircraftsNavbarComponent,
+    AlertComponent,
   ],
   imports: [
     BrowserModule,

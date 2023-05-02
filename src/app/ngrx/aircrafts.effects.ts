@@ -3,7 +3,7 @@ import { AircraftService } from "../services/aircraft.service";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { Observable, catchError, map, mergeMap, of } from "rxjs";
 import { Action } from "@ngrx/store";
-import { AircraftActionsTypes, GetAllAircraftsActionError, GetAllAircraftsActionSuccess, GetDesignedAircraftsActionError, GetDesignedAircraftsActionSuccess, GetDevelopmentAircraftsAction, GetDevelopmentAircraftsActionError, GetDevelopmentAircraftsActionSuccess, GetSearchAircraftsAction, GetSearchAircraftsActionError, GetSearchAircraftsActionSuccess } from "./aircrafts.actions";
+import { AircraftActionsTypes, GetAlertAircraftsAction, GetAlertAircraftsActionError, GetAlertAircraftsActionSuccess, GetAllAircraftsActionError, GetAllAircraftsActionSuccess, GetDesignedAircraftsActionError, GetDesignedAircraftsActionSuccess, GetDevelopmentAircraftsAction, GetDevelopmentAircraftsActionError, GetDevelopmentAircraftsActionSuccess, GetSearchAircraftsAction, GetSearchAircraftsActionError, GetSearchAircraftsActionSuccess } from "./aircrafts.actions";
 
 @Injectable()
 export class AircraftsEffects {
@@ -53,6 +53,19 @@ export class AircraftsEffects {
                     map(aircrafts => aircrafts.filter(a => a.prog.toLowerCase().includes(action.payload.toLowerCase()))),
                     map((aircrafts) => new GetSearchAircraftsActionSuccess(aircrafts)),
                     catchError((err) => of(new GetSearchAircraftsActionError(err.message)))
+                )
+            })
+        )
+    );
+
+    getAlerthAircraftsEffect:Observable<Action> = createEffect(
+        () => this.effectActions.pipe(
+            ofType(AircraftActionsTypes.GET_ALERT_AIRCRAFTS),
+            mergeMap((action : GetAlertAircraftsAction) => {
+                return this.airecraftService.getAircrafts().pipe(
+                    map(aircrafts => aircrafts.filter(a => a.development == true && a.design == true)),
+                    map((aircrafts) => new GetAlertAircraftsActionSuccess(aircrafts)),
+                    catchError((err) => of(new GetAlertAircraftsActionError(err.message)))
                 )
             })
         )

@@ -1,10 +1,4 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { AircraftService } from 'src/app/services/aircraft.service';
-import { Aircraft } from 'src/app/model/Aircraft.model';
-import { Observable, catchError, map, of, startWith } from 'rxjs';
-import { AppDataState, DataStateEnum } from 'src/app/state/DataStateEnum';
-import { AircraftActionsTypes } from './aircraftsActionsTypes';
-import { EventService } from 'src/app/state/event.service';
 import { GetAllAircraftsAction, GetDesignedAircraftsAction, GetDevelopmentAircraftsAction, GetSearchAircraftsAction } from 'src/app/ngrx/aircrafts.actions';
 import { Store } from '@ngrx/store';
 

@@ -16,7 +16,11 @@ export enum AircraftActionsTypes {
 
     GET_SEARCH_AIRCRAFTS = "[Aircrafts] Get Search Aircrafts",
     GET_SEARCH_AIRCRAFTS_SUCCESS = "[Aircrafts] Get Search Aircrafts Success",
-    GET_SEARCH_AIRCRAFTS_ERROR = "[Aircrafts] Get Search Aircrafts Error"
+    GET_SEARCH_AIRCRAFTS_ERROR = "[Aircrafts] Get Search Aircrafts Error",
+
+    GET_ALERT_AIRCRAFTS = "[Aircrafts] Get ALERT Aircrafts",
+    GET_ALERT_AIRCRAFTS_SUCCESS = "[Aircrafts] Get ALERT Aircrafts Success",
+    GET_ALERT_AIRCRAFTS_ERROR = "[Aircrafts] Get ALERT Aircrafts Error"
 }
 
 export class GetAllAircraftsAction implements Action{
@@ -71,4 +75,17 @@ export class GetSearchAircraftsActionError implements Action{
     constructor(public payload:string){}
 }
 
-export type AircraftsActions = GetAllAircraftsAction | GetAllAircraftsActionSuccess | GetAllAircraftsActionError | GetDesignedAircraftsAction | GetDesignedAircraftsActionSuccess | GetDesignedAircraftsActionError | GetDevelopmentAircraftsAction | GetDevelopmentAircraftsActionSuccess | GetDevelopmentAircraftsActionError | GetSearchAircraftsAction | GetSearchAircraftsActionSuccess | GetSearchAircraftsActionError;
+export class GetAlertAircraftsAction implements Action{
+    type: AircraftActionsTypes = AircraftActionsTypes.GET_ALERT_AIRCRAFTS;
+    constructor(public payload:any){}
+}
+export class GetAlertAircraftsActionSuccess implements Action{
+    type: AircraftActionsTypes = AircraftActionsTypes.GET_ALERT_AIRCRAFTS_SUCCESS;
+    constructor(public payload:Aircraft[]){}
+}
+export class GetAlertAircraftsActionError implements Action{
+    type: AircraftActionsTypes = AircraftActionsTypes.GET_ALERT_AIRCRAFTS_ERROR;
+    constructor(public payload:string){}
+}
+
+export type AircraftsActions = GetAlertAircraftsAction | GetAlertAircraftsActionSuccess | GetAlertAircraftsActionError |GetAllAircraftsAction | GetAllAircraftsActionSuccess | GetAllAircraftsActionError | GetDesignedAircraftsAction | GetDesignedAircraftsActionSuccess | GetDesignedAircraftsActionError | GetDevelopmentAircraftsAction | GetDevelopmentAircraftsActionSuccess | GetDevelopmentAircraftsActionError | GetSearchAircraftsAction | GetSearchAircraftsActionSuccess | GetSearchAircraftsActionError;

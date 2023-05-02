@@ -11,7 +11,7 @@
     </ng-container>
     <ng-container *ngSwitchCase="aircraftsStateEnum.LOADED">
 
-        <table class="table table-striped">
+        <table class="table table-striped ">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -20,7 +20,7 @@
                     <th>Development</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="border border-danger border-3">
                 <tr *ngFor="let aircraft of state.aircrafts">
                     <td>{{aircraft.id}}</td>
                     <td>{{aircraft.prog}}</td>

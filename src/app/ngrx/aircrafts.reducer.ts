@@ -33,6 +33,13 @@ export function AircraftsReducer(state : AircraftsState = initState, action:Acti
         case AircraftActionsTypes.GET_SEARCH_AIRCRAFTS_ERROR:
             return {...state, dataState:AircraftStateEnum.ERROR, errorMessage:(<AircraftsActions> action).payload}
 
+        case AircraftActionsTypes.GET_ALERT_AIRCRAFTS:
+            return {...state, dataState:AircraftStateEnum.LOADING}
+        case AircraftActionsTypes.GET_ALERT_AIRCRAFTS_SUCCESS:
+            return {...state, dataState:AircraftStateEnum.LOADED, aircrafts:(<AircraftsActions> action).payload}  
+        case AircraftActionsTypes.GET_ALERT_AIRCRAFTS_ERROR:
+            return {...state, dataState:AircraftStateEnum.ERROR, errorMessage:(<AircraftsActions> action).payload}
+
         default : 
             return {...state}
     }

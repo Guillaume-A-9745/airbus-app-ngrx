@@ -12,6 +12,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AircraftsReducer } from './ngrx/aircrafts.reducer';
 import { AircraftsEffects } from './ngrx/aircrafts.effects';
 import { AlertComponent } from './components/alert/alert.component';
+import { SparePartComponent } from './components/spare-part/spare-part.component';
+import { SparePartNavbarComponent } from './components/spare-part/spare-part-navbar/spare-part-navbar.component';
 
 
 @NgModule({
@@ -20,6 +22,8 @@ import { AlertComponent } from './components/alert/alert.component';
     AircraftsComponent,
     AircraftsNavbarComponent,
     AlertComponent,
+    SparePartComponent,
+    SparePartNavbarComponent,
   ],
   imports: [
     BrowserModule,

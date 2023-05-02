@@ -5,5 +5,13 @@
         {"id": 3,"prog": "A380","design": false,"development": true},
         {"id": 4,"prog": "A400W","design": false,"development": false},
         {"id": 5,"prog": "A330","design": true,"development": true}
+    ],
+    "spare_part": [
+        {"id": 1,"name": "numero-1"},
+        {"id": 2,"name": "numero-2"},
+        {"id": 3,"name": "numero-3"},
+        {"id": 4,"name": "numero-4"},
+        {"id": 5,"name": "numero-5"},
+        {"id": 6,"name": "numero-6"}
     ]
 }

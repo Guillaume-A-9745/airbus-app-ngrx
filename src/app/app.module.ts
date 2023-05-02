@@ -14,6 +14,8 @@ import { AircraftsEffects } from './ngrx/aircrafts.effects';
 import { AlertComponent } from './components/alert/alert.component';
 import { SparePartComponent } from './components/spare-part/spare-part.component';
 import { SparePartNavbarComponent } from './components/spare-part/spare-part-navbar/spare-part-navbar.component';
+import { SparePartReducer } from './ngrx/sparePart.reducer';
+import { SparePartEffects } from './ngrx/sparePart.effects';
 
 
 @NgModule({
@@ -30,8 +32,8 @@ import { SparePartNavbarComponent } from './components/spare-part/spare-part-nav
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    StoreModule.forRoot({airbusState : AircraftsReducer}),
-    EffectsModule.forRoot([AircraftsEffects]),
+    StoreModule.forRoot({airbusState : AircraftsReducer, sparePart : SparePartReducer}),
+    EffectsModule.forRoot([AircraftsEffects, SparePartEffects]),
     StoreDevtoolsModule.instrument()
   ],
   providers: [],

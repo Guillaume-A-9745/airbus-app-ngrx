@@ -1,5 +1,6 @@
 import { EntityState } from "@ngrx/entity";
 import { Aircraft } from "../model/Aircraft.model";
+import { Operation } from "../model/Operation.model";
 
 export enum AircraftStateEnum{
     LOADING = "Loading",

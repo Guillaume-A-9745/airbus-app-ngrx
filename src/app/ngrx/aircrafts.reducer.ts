@@ -3,6 +3,7 @@ import { AircraftsState, initState } from "./aircrafts.state"
 import { AircraftActionsTypes, AircraftsActions } from "./aircrafts.actions";
 import { AircraftStateEnum } from "./aircrafts.state";
 import { EntityAdapter, createEntityAdapter } from "@ngrx/entity";
+import { Operation } from "../model/Operation.model";
 
 export function AircraftsReducer(state : AircraftsState = initState, action:Action) : AircraftsState {
     switch (action.type) {

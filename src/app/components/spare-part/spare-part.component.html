@@ -1,25 +1,31 @@
 <div>
     <app-spare-part-navbar></app-spare-part-navbar>
 
-    <ng-container>
-
+    <ng-container *ngIf="sparePartState$ | async as state" [ngSwitch]="state.dataState">
+        <ng-container *ngSwitchCase="sparePartStateEnum.INITIAL">
+            <div class="p-2">Initial State</div>
+        </ng-container>
+        <ng-container *ngSwitchCase="sparePartStateEnum.LOADING">
+            <div class="p-2">Loading</div>
+        </ng-container>
+        <ng-container *ngSwitchCase="sparePartStateEnum.ERROR">
+            <div class="p-2 text-danger">{{state.errorMessage}}</div>
+        </ng-container>
+        <ng-container *ngSwitchCase="sparePartStateEnum.LOADED">
             <table class="table table-striped">
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Program</th>
-                        <th>Design</th>
-                        <th>Development</th>
+                        <th>Name</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>}</td>
+                    <tr *ngFor="let spare of state.sparePart">
+                        <td>{{spare.id}}</td>
+                        <td>{{spare.name}}</td>
                     </tr>
                 </tbody>
             </table>
         </ng-container>
+    </ng-container>
 </div>

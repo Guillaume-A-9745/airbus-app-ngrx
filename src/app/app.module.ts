@@ -13,6 +13,7 @@ import { AircraftsReducer } from './ngrx/aircrafts.reducer';
 import { AircraftsEffects } from './ngrx/aircrafts.effects';
 import { AlertComponent } from './components/alert/alert.component';
 import { IllustrationComponent } from './components/illustration/illustration.component';
+import { AuthComponent } from './components/auth/auth.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { IllustrationComponent } from './components/illustration/illustration.co
     AircraftsNavbarComponent,
     AlertComponent,
     IllustrationComponent,
+    AuthComponent,
   ],
   imports: [
     BrowserModule,

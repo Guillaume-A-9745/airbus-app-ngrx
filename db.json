@@ -5,5 +5,11 @@
         {"id": 3,"prog": "A380","design": false,"development": true},
         {"id": 4,"prog": "A400W","design": false,"development": false},
         {"id": 5,"prog": "A330","design": true,"development": true}
+    ],
+    "users":[
+        {"id": 1,"email": "test01@test.com","password": "123456","isAdmin": true},
+        {"id": 2,"email": "test02@test.com","password": "123456","isAdmin": false},
+        {"id": 3,"email": "test03@test.com","password": "123456","isAdmin": false},
+        {"id": 4,"email": "test04@test.com","password": "123456","isAdmin": false}
     ]
 }

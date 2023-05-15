@@ -14,6 +14,11 @@ import { AircraftsEffects } from './ngrx/aircrafts.effects';
 import { AlertComponent } from './components/alert/alert.component';
 import { IllustrationComponent } from './components/illustration/illustration.component';
 import { AuthComponent } from './components/auth/auth.component';
+import { LogInComponent } from './components/auth/log-in/log-in.component';
+import { SignUpComponent } from './components/auth/sign-up/sign-up.component';
+import { AuthService } from './services/auth.service';
+import { AircraftService } from './services/aircraft.service';
+import { AuthEffects } from './ngrx/auth.effects';
 
 
 @NgModule({
@@ -24,6 +29,8 @@ import { AuthComponent } from './components/auth/auth.component';
     AlertComponent,
     IllustrationComponent,
     AuthComponent,
+    LogInComponent,
+    SignUpComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,10 +38,10 @@ import { AuthComponent } from './components/auth/auth.component';
     HttpClientModule,
     FormsModule,
     StoreModule.forRoot({airbusState : AircraftsReducer}),
-    EffectsModule.forRoot([AircraftsEffects]),
+    EffectsModule.forRoot([AircraftsEffects,AuthEffects]),
     StoreDevtoolsModule.instrument()
   ],
-  providers: [],
+  providers: [AircraftService,AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

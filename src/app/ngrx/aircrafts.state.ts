@@ -15,6 +15,6 @@ export interface AircraftsState {
 
 export const initState : AircraftsState = {
     aircrafts: [],
-    errorMessage:"",
-    dataState:AircraftStateEnum.INITIAL
+    errorMessage: "",
+    dataState: AircraftStateEnum.INITIAL
 }

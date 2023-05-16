@@ -1,36 +1,44 @@
 <div class="row justify-content-center pt-3">
-    <div class="col-md-4">
-      <h1>Log in</h1>
-      <hr><br>
-      <form (ngSubmit)="onSubmit()" ngNativeValidate>
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input
-            [(ngModel)]="user.email"
-            name="email"
-            type="email"
-            required
-            class="form-control"
-            id="email"
-            placeholder="enter your email">
-        </div><br>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input
-            [(ngModel)]="user.password"
-            name="password"
-            type="password"
-            required
-            class="form-control"
-            id="password"
-            placeholder="enter a password">
-        </div><br><div class="text-center">
+  <div class="col-md-4">
+    <h1>Log in</h1>
+    <hr><br>
+    <form [formGroup]="myForm" (ngSubmit)="onLogin(myForm)">
+      <div class="form-group">
+        <label class="control-label">email : </label>
+        <input type="text" formControlName="email" class="form-control">
+      </div><br>
+      <div class="form-group">
+        <label class="control-label">password : </label>
+        <input type="password" formControlName="pwd" class="form-control">
+      </div><br>
+      <div class="text-center">
         <button type="submit" class="btn btn-success m-2">Submit</button>
-        <a [routerLink]="['/']" class="btn btn-danger m-2">Cancel</a></div>
-      </form>
-      <p class="text-center">
-        <span>Don't have an account?&nbsp;</span>
-        <a [routerLink]="['/signUp']">Sign up!</a>
-      </p>
-    </div>
+        <a [routerLink]="['/']" class="btn btn-danger m-2">Cancel</a>
+      </div>
+      <div class="text-danger"> {{error}}</div>
+    </form>
+    <p class="text-center">
+      <span>Don't have an account?&nbsp;</span>
+      <a [routerLink]="['/signUp']">Sign up!</a>
+    </p>
   </div>
+  <div>
+    <ng-container *ngIf="aircraftsState$ | async as state" [ngSwitch]="state.loginState">
+      <ng-container *ngSwitchCase="loginStateEnum.INITIAL">
+        <div class="p-2"> let's go !</div>
+      </ng-container>
+      <ng-container *ngSwitchCase="loginStateEnum.REQUEST_LOGIN">
+        <div class="p-2"> Login</div>
+      </ng-container>
+      <ng-container *ngSwitchCase="loginStateEnum.RESPONSE_LOGIN_OK">
+        <div class="p-2"> Welcome </div>
+      </ng-container>
+      <ng-container *ngSwitchCase="loginStateEnum.ERROR">
+        <div class="p-2 text-danger"> {{state.errorMessage}}</div>
+      </ng-container>
+      <ng-container *ngSwitchCase="loginStateEnum.RESPONSE_LOGIN_DENIED">
+        <div class="p-2 text-danger"> Accès non authorisé</div>
+      </ng-container>
+    </ng-container>
+  </div>
+</div>

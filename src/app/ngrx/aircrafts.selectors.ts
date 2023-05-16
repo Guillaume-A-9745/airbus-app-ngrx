@@ -11,3 +11,10 @@ export const selectCountAlertAircrafts = createSelector(
         return total;
     }
 );
+
+export const selectIsConnected = createSelector(
+    createFeatureSelector('airbusState'),  
+    (state: AircraftsState) => {
+      return state.isConnected;
+    }
+);

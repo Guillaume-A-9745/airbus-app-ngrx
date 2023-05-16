@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AircraftStateEnum, AircraftsState } from 'src/app/ngrx/aircrafts.state';
-import { selectCountAlertAircrafts } from 'src/app/ngrx/aircrafts.selectors';
+import { selectCountAlertAircrafts, selectIsConnected } from 'src/app/ngrx/aircrafts.selectors';
+import { Router } from '@angular/router';
  
 @Component({
   selector: 'app-aircrafts',
@@ -13,9 +14,11 @@ export class AircraftsComponent implements OnInit{
   aircraftsState$:Observable<AircraftsState> | null = null;
   readonly aircraftsStateEnum = AircraftStateEnum;
   countAlertAircrafts$ : Observable<number> | undefined;
+  isConnected$: Observable<Boolean> | null = null;
 
-  constructor(private store:Store<any>) {
+  constructor(private store:Store<any>, private router : Router) {
     this.countAlertAircrafts$ = store.select(selectCountAlertAircrafts);
+    this.isConnected$ = store.select(selectIsConnected);
   }
   
   ngOnInit(): void {

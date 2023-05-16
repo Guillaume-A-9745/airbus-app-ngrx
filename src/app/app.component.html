@@ -1,16 +1,29 @@
 <header class="container-lg">
   <nav class="navbar navbar-expand-sm bg-ligth navbar-ligth justify-content-between">
     <a href="#" class="navbar-brand">AIRBUS</a>
-    <div class="d-flex justify-content-between w-100">
-      <ul class="navbar-nav">
-        <li class="nav-item"> <a routerLink="/aircrafts" class="nav-link">Aircrafts</a> </li>
-        <li class="nav-item"> <a routerLink="/alert" class="nav-link">Alert</a> </li>
-        <li class="nav-item"> <a routerLink="/illustration" class="nav-link">Ngrx Illustration</a> </li>
-      </ul>
-      <div>
-        <app-auth></app-auth>
+
+    <ng-container *ngIf="isConnected$ | async; else elseBlock">
+      <div class="d-flex justify-content-between w-100">
+        <ul class="navbar-nav">
+          <li class="nav-item"> <a routerLink="/aircrafts" class="nav-link">Aircrafts</a> </li>
+          <li class="nav-item"> <a routerLink="/alert" class="nav-link">Alert</a> </li>
+          <li class="nav-item"> <a routerLink="/illustration" class="nav-link">Ngrx Illustration</a> </li>
+        </ul>
+        <div>
+          <ul class="navbar-nav">
+            <li class="nav-item"><a class="btn btn-warning" (click)="onLogout()">Log out</a></li>
+        </ul>
+        </div>
       </div>
-    </div>
+    </ng-container>
+
+    <ng-template #elseBlock>
+      <div class="d-flex justify-content-end w-100">
+        <div>
+          <app-auth></app-auth>
+        </div>
+      </div>
+    </ng-template>
 
   </nav>
 </header>

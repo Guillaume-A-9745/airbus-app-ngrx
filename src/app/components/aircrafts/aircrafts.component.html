@@ -1,39 +1,41 @@
 <div>
-    <app-aircrafts-navbar></app-aircrafts-navbar>
+    <ng-container *ngIf="isConnected$ | async">
+        <app-aircrafts-navbar></app-aircrafts-navbar>
 
-    <ng-container *ngIf="aircraftsState$ | async as state" [ngSwitch]="state.dataState">
-        <ng-container *ngSwitchCase="aircraftsStateEnum.INITIAL">
-            <div class="p-2">Initial State</div>
-        </ng-container>
-        <ng-container *ngSwitchCase="aircraftsStateEnum.LOADING">
-            <div class="p-2">Loading</div>
-        </ng-container>
-        <ng-container *ngSwitchCase="aircraftsStateEnum.ERROR">
-            <div class="p-2 text-danger">{{state.errorMessage}}</div>
-        </ng-container>
-        <ng-container *ngSwitchCase="aircraftsStateEnum.LOADED">
+        <ng-container *ngIf="aircraftsState$ | async as state" [ngSwitch]="state.dataState">
+            <ng-container *ngSwitchCase="aircraftsStateEnum.INITIAL">
+                <div class="p-2">Initial State</div>
+            </ng-container>
+            <ng-container *ngSwitchCase="aircraftsStateEnum.LOADING">
+                <div class="p-2">Loading</div>
+            </ng-container>
+            <ng-container *ngSwitchCase="aircraftsStateEnum.ERROR">
+                <div class="p-2 text-danger">{{state.errorMessage}}</div>
+            </ng-container>
+            <ng-container *ngSwitchCase="aircraftsStateEnum.LOADED">
 
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Program</th>
-                        <th>Design</th>
-                        <th>Development</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let aircraft of state.aircrafts">
-                        <td>{{aircraft.id}}</td>
-                        <td>{{aircraft.prog}}</td>
-                        <td>{{aircraft.design}}</td>
-                        <td>{{aircraft.development}}</td>
-                    </tr>
-                </tbody>
-            </table>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Program</th>
+                            <th>Design</th>
+                            <th>Development</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let aircraft of state.aircrafts">
+                            <td>{{aircraft.id}}</td>
+                            <td>{{aircraft.prog}}</td>
+                            <td>{{aircraft.design}}</td>
+                            <td>{{aircraft.development}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </ng-container>
         </ng-container>
-    </ng-container>
-    <ng-container *ngIf="countAlertAircrafts$ | async as countAircrafts">
-        <h6 class="text-danger">Total aircrafts under design & development : {{countAircrafts}}</h6>
+        <ng-container *ngIf="countAlertAircrafts$ | async as countAircrafts">
+            <h6 class="text-danger">Total aircrafts under design & development : {{countAircrafts}}</h6>
+        </ng-container>
     </ng-container>
 </div>
